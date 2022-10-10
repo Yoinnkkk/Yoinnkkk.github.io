@@ -107,8 +107,8 @@ button:active {
   transition-duration: 400ms;
   gap: 1rem;
   grid-template-areas: 
-  "Image"
-  "Description"
+  "Image",
+  "Description",
   "Start Completed";
 }
 
@@ -119,11 +119,12 @@ button:active {
   transform: translateY(-8px);
 }
 
-.block img {
+.image {
   grid-area: "Image";
 }
 
-.block p {
+.description {
+  text-align: center;
   justify-self: center;
   font-size: 1rem;
   grid-area: "Description";

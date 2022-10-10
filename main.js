@@ -52,13 +52,15 @@ class Block {
 }
 
 function listAllRepos() {
-    //let repolist = getRepos()
-    let repolist = 40
-    document.getElementById("blockwrapper").style.setProperty("--rows", Math.ceil(repolist / 6))
-    for (let i=0; i < repolist; i++) {
-        console.log("made")
-        let block = new Block()
-    }
+    getRepos().then(function(response) {
+        for (let i=0; i < response.length; i++) {
+            let block = new Block(response[i].name, response[i].description);
+            block.infowrapper.addEventListener('click', function (){
+                location.href = `https://www.github.com/Yoinnkkk/${response[i].name}`
+            })
+        }
+        document.getElementById("blockwrapper").style.setProperty("--rows", Math.ceil(response / 6))
+    })
 }
 window.addEventListener('load', function() {
     listAllRepos();
