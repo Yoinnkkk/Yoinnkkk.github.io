@@ -62,6 +62,7 @@ function listAllRepos() {
         document.getElementById("blockwrapper").style.setProperty("--rows", Math.ceil(response / 6))
     })
 }
+
 window.addEventListener('load', function() {
     listAllRepos();
 })
