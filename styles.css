@@ -1,0 +1,79 @@
+:root {
+    --swap-colour: #262626;
+    --bg-colour: #FFFFFC;
+    --p-colour: #7F5A83;
+    --a-colour: #A188A6;
+    --font-colour: #2E2C2F;
+    font-family: 'Poppins', sans-serif;
+}
+
+[data-theme="dark"] {
+    --swap-colour: #FFFFFC;
+    --bg-colour: #262626;
+    --p-colour: #344966;
+    --a-colour: #6E7DAB;
+    --font-colour: #D8DBE2;
+}
+
+body {
+    background-color: var(--bg-colour);
+    color: var(--font-colour);
+    transition-duration: 0.4s;
+}
+
+p {
+    font-size: 2rem;
+    color: inherit;
+}
+
+h1 {
+    color: inherit;
+    margin: 1rem;
+    padding: 1rem;
+    border-bottom: solid var(--a-colour);
+    text-align: center;
+    font-size: 3rem;
+}
+
+/* CSS */
+button {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: var(--swap-colour);
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    height: 50px;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 1rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    text-decoration: none;
+    transition: background 400ms ease-in-out, transform 150ms ease, box-shadow 400ms ease;
+    touch-action: manipulation;
+    user-select: none;
+    vertical-align: baseline;
+    -webkit-user-select: none;
+    width: 50px;
+}
+
+button:hover,
+button:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
