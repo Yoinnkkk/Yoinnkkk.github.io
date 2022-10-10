@@ -50,7 +50,7 @@ button {
     height: 50px;
     justify-content: center;
     line-height: 1.25;
-    margin: 1rem;
+    margin: 0.5rem 1rem 1rem 1rem;
     padding: calc(.875rem - 1px) calc(1.5rem - 1px);
     position: absolute;
     right: 0px;
