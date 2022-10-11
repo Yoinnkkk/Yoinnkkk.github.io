@@ -79,9 +79,9 @@ button:active {
   transform: translateY(0);
 }
 
-/* Blocks & Their Wrapper*/
+/* Cards & Their Wrapper*/
 
-.blockwrapper {
+.cardwrapper {
   --rows: 5;
   overflow-y: auto;
   display: grid;
@@ -95,7 +95,7 @@ button:active {
 
 }
 
-.block {
+.card {
   opacity: 0.9;
   margin-top: 0.5rem;
   border-radius: 2%;
@@ -112,7 +112,7 @@ button:active {
   "Start Completed";
 }
 
-.block:hover {
+.card:hover {
   opacity: 1;
   box-shadow: rgba(0, 0, 0, 0.1) 2.5px 8px 30px;
   cursor: pointer;
@@ -121,6 +121,8 @@ button:active {
 
 .image {
   grid-area: "Image";
+  width: 250px;
+  border-radius: 2%;
 }
 
 .description {

@@ -1,6 +1,6 @@
 // Toggle the dark mode and light mode
 const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-let lightmode = true
+let lightmode = true;
 const togglebutton = document.getElementById("toggle");
 
 if (currentTheme) {
@@ -28,50 +28,55 @@ async function getRepos(mode="repos", page="") {
     if (mode == "repos") {
         let response = await fetch("https://api.github.com/users/Yoinnkkk/repos");
         let data = await response.json();
-        return data
+        return data;
     } else if (mode == "pagecheck") {
-        let response = await fetch(`https://yoinnkkk.github.io/${page}`, { method: 'head'})
-        return response.ok
+        let response = await fetch(`https://yoinnkkk.github.io/${page}`, { method: 'head'});
+        return response.ok;
     }
 }
 
-class Block {
+class Card {
     constructor(name="Name", description="Description") {
         this.name = name;
         this.description = description;
-        this.infowrapper = document.createElement("div");
-        this.infowrapper.classList.add("block");
-        document.getElementById("blockwrapper").appendChild(this.infowrapper);
+        this.cardCreator();
+        
+    }
+    cardCreator() {
+        // Make the card
+        this.card = document.createElement("div");
+        this.card.classList.add("card");
+        document.getElementById("cardwrapper").appendChild(this.card);
         // Making the image
         this.image = document.createElement("img");
         this.image.classList.add("image");
-        this.image.src = "";
+        this.image.src = `screenshots/${this.name}.png`;
         this.image.alt = this.name;
-        this.infowrapper.appendChild(this.image);
+        this.card.appendChild(this.image);
         // Making the description paragraph
         this.descriptionp = document.createElement("p");
         this.descriptionp.textContent = this.description;
         this.descriptionp.classList.add("description");
-        this.infowrapper.appendChild(this.descriptionp);
+        this.card.appendChild(this.descriptionp);
     }
 }
 
 function listAllRepos() {
     getRepos().then(function(response) {
         for (let i=0; i < response.length; i++) {
-            let block = new Block(response[i].name, response[i].description);
-            block.infowrapper.addEventListener('click', function (){
+            let card = new Card(response[i].name, response[i].description);
+            card.card.addEventListener('click', function (){
                 getRepos("pagecheck", response[i].name).then(function(eventreturn) {
-                    if (eventreturn == false) {
-                        location.href = `https://www.github.com/Yoinnkkk/${response[i].name}`
+                    if (eventreturn == false  || response[i].name == "Yoinnkkk.github.io") {
+                        location.href = `https://www.github.com/Yoinnkkk/${response[i].name}`;
                     } else {
-                        location.href = `https://Yoinnkkk.github.io/${response[i].name}`
+                        location.href = `https://Yoinnkkk.github.io/${response[i].name}`;
                     }
                     
                 })
             })
         }
-        document.getElementById("blockwrapper").style.setProperty("--rows", Math.ceil(response.length / 6))
+        document.getElementById("cardwrapper").style.setProperty("--rows", Math.ceil(response.length / 6));
     })
 }
 
