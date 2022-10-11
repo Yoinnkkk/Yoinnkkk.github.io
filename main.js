@@ -24,10 +24,15 @@ function toggle() {
 }
 
 // Get list of github repositories
-async function getRepos() {
-    let response = await fetch("https://api.github.com/users/Yoinnkkk/repos");
-    let data = await response.json();
-    return data
+async function getRepos(mode="repos", page="") {
+    if (mode == "repos") {
+        let response = await fetch("https://api.github.com/users/Yoinnkkk/repos");
+        let data = await response.json();
+        return data
+    } else if (mode == "pagecheck") {
+        let response = await fetch(`https://yoinnkkk.github.io/${page}`, { method: 'head'})
+        return response.ok
+    }
 }
 
 class Block {
@@ -56,10 +61,17 @@ function listAllRepos() {
         for (let i=0; i < response.length; i++) {
             let block = new Block(response[i].name, response[i].description);
             block.infowrapper.addEventListener('click', function (){
-                location.href = `https://www.github.com/Yoinnkkk/${response[i].name}`
+                getRepos("pagecheck", response[i].name).then(function(eventreturn) {
+                    if (eventreturn == false) {
+                        location.href = `https://www.github.com/Yoinnkkk/${response[i].name}`
+                    } else {
+                        location.href = `https://Yoinnkkk.github.io/${response[i].name}`
+                    }
+                    
+                })
             })
         }
-        document.getElementById("blockwrapper").style.setProperty("--rows", Math.ceil(response / 6))
+        document.getElementById("blockwrapper").style.setProperty("--rows", Math.ceil(response.length / 6))
     })
 }
 
