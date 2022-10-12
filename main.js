@@ -36,10 +36,11 @@ async function getRepos(mode="repos", page="") {
 }
 
 class Card {
-    constructor(name="Name", description="Description") {
+    constructor(name="Name", description="Description", start=new Date()) {
         this.name = name;
         this.description = description;
-        this.cardCreator();
+        this.start = start
+        this.cardCreator(); 
         
     }
     cardCreator() {
@@ -58,13 +59,18 @@ class Card {
         this.descriptionp.textContent = this.description;
         this.descriptionp.classList.add("description");
         this.card.appendChild(this.descriptionp);
+        // Making the start date text
+        this.date = document.createElement("p");
+        this.date.textContent = `Project started on ${this.start}`;
+        this.date.classList.add("date");
+        this.card.appendChild(this.date);
     }
 }
 
 function listAllRepos() {
     getRepos().then(function(response) {
         for (let i=0; i < response.length; i++) {
-            let card = new Card(response[i].name, response[i].description);
+            let card = new Card(response[i].name, response[i].description, response[i].created_at.split("T")[0]);
             card.card.addEventListener('click', function (){
                 getRepos("pagecheck", response[i].name).then(function(eventreturn) {
                     if (eventreturn == false  || response[i].name == "Yoinnkkk.github.io") {
@@ -75,8 +81,14 @@ function listAllRepos() {
                     
                 })
             })
+
         }
-        document.getElementById("cardwrapper").style.setProperty("--rows", Math.ceil(response.length / 6));
+        cardwrapper = document.getElementById("cardwrapper");
+        cardwrapper.style.setProperty("--rows", Math.ceil(response.length / 6));
+        cardwrapper.style.setProperty("--columns", Math.floor(window.innerWidth / 320));
+        window.onresize = function() {
+            cardwrapper.style.setProperty("--columns", Math.floor(window.innerWidth / 320))
+        }
     })
 }
 

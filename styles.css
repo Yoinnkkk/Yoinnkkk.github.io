@@ -83,14 +83,17 @@ button:active {
 
 .cardwrapper {
   --rows: 5;
+  --columns: 6;
   overflow-y: auto;
   display: grid;
-  gap: 0.5rem;
+  gap: 1rem;
   margin-top: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
   height: 100%;
   width: auto;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-  grid-template-columns: repeat(6, 1fr [col-start]);
+  grid-template-columns: repeat(var(--columns), 1fr [col-start]);
   grid-template-rows: repeat(var(--rows), 1fr [col-start]);
 
 }
@@ -109,7 +112,7 @@ button:active {
   grid-template-areas: 
   "Image",
   "Description",
-  "Start Completed";
+  "Start Status";
 }
 
 .card:hover {
@@ -128,6 +131,13 @@ button:active {
 .description {
   text-align: center;
   justify-self: center;
+  height: 80px;
   font-size: 1rem;
   grid-area: "Description";
+}
+
+.date {
+  text-align: center;
+  font-size: 0.75rem;
+  grid-area: "Start";
 }
