@@ -1,27 +1,3 @@
-// Toggle the dark mode and light mode
-const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-let lightmode = true;
-const togglebutton = document.getElementById("toggle");
-
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-
-    if (currentTheme != "light") {lightmode = false}
-}
-
-function toggle() {
-    if (lightmode == true) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        lightmode = false
-        return
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-        lightmode = true
-        return
-    }
-}
 
 // Get list of github repositories
 async function getRepos(mode="repos", page="") {
@@ -39,7 +15,7 @@ class Card {
     constructor(name="Name", description="Description", start=new Date()) {
         this.name = name;
         this.description = description;
-        this.start = start
+        this.start = start;
         this.cardCreator(); 
         
     }
@@ -47,7 +23,7 @@ class Card {
         // Make the card
         this.card = document.createElement("div");
         this.card.classList.add("card");
-        document.getElementById("cardwrapper").appendChild(this.card);
+        document.getElementById("card-wrapper").appendChild(this.card);
         // Making the image
         this.image = document.createElement("img");
         this.image.classList.add("image");
@@ -71,6 +47,7 @@ function listAllRepos() {
     getRepos().then(function(response) {
         for (let i=0; i < response.length; i++) {
             let card = new Card(response[i].name, response[i].description, response[i].created_at.split("T")[0]);
+            console.log(card.card.getBoundingClientRect().top)
             card.card.addEventListener('click', function (){
                 getRepos("pagecheck", response[i].name).then(function(eventreturn) {
                     if (eventreturn == false  || response[i].name == "Yoinnkkk.github.io") {
@@ -83,16 +60,12 @@ function listAllRepos() {
             })
 
         }
-        cardwrapper = document.getElementById("cardwrapper");
-        cardwrapper.style.setProperty("--rows", Math.ceil(response.length / 6));
-        cardwrapper.style.setProperty("--columns", Math.floor(window.innerWidth / 320));
-        window.onresize = function() {
-            cardwrapper.style.setProperty("--columns", Math.floor(window.innerWidth / 320))
-        }
     })
 }
 
+listAllRepos();
 
-window.addEventListener('load', function() {
-    listAllRepos();
-})
+
+
+
+
