@@ -45,7 +45,7 @@ chars.forEach((char) => {
     span.innerHTML = char
     span.onmouseover = (event) => {
         event.target.style.fontSize = `4rem`
-        event.target.style.color = `#${Math.floor(Math.random()*16777215).toString(16)}`
+        event.target.style.color = "transparent";
     }
     span.onmouseleave = (event) => {
         setTimeout(() => {
