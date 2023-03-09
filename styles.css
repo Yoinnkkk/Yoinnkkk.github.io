@@ -48,6 +48,7 @@ p {
     #ff686b
   );
   background-size: 200%;
+  background-clip: text;
   -webkit-background-clip: text;
   animation: background-pan 3s linear infinite;
   color: inherit;
