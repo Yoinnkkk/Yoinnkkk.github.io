@@ -6,7 +6,7 @@ async function getRepos(mode="repos", page="") {
         let data = await response.json();
         return data;
     } else if (mode == "pagecheck") {
-        let response = await fetch(`https://yoinnkkk.github.io/${page}`, { method: 'head'});
+        let response = await fetch(`https://www.yoink.space/${page}`, { method: 'head'});
         return response.ok;
     }
 }
@@ -53,7 +53,7 @@ function listAllRepos() {
                     if (eventreturn == false  || response[i].name == "Yoinnkkk.github.io") {
                         location.href = `https://www.github.com/Yoinnkkk/${response[i].name}`;
                     } else {
-                        location.href = `https://Yoinnkkk.github.io/${response[i].name}`;
+                        location.href = `https://www.yoink.space/${response[i].name}`;
                     }
                     
                 })
